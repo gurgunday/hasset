@@ -31,10 +31,10 @@ const updateFilePathsWithHashes = async (
     }
 
     const filesIterable = new Glob("**/**", {
-      cwd,
-      absolute: true,
-      follow: true,
       nodir: true,
+      follow: true,
+      absolute: true,
+      cwd,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
@@ -79,10 +79,10 @@ const generateHashesAndReplace = async ({
     const files = [];
 
     const filesIterable = new Glob("**/**", {
-      cwd: rootPath,
-      absolute: true,
-      follow: true,
       nodir: true,
+      follow: true,
+      absolute: true,
+      cwd: rootPath,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
