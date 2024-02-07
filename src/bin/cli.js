@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { generateHashes } from "./ghash.js";
+import { generateHashes } from "../ghash.js";
 import process from "node:process";
 
 const parseArguments = (args) => {
