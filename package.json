@@ -1,0 +1,31 @@
+{
+  "name": "hasset",
+  "description": "Add hash postfixes to your assets.",
+  "author": "Gürgün Dayıoğlu",
+  "license": "MIT",
+  "version": "0.0.0",
+  "type": "module",
+  "bin": "./src/cli.js",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write ."
+  },
+  "dependencies": {
+    "fastq": "^1.17.1",
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@fastify/pre-commit": "^2.1.0",
+    "grules": "^0.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurgunday/ghtml.git"
+  }
+}
