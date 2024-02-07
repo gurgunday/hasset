@@ -17,7 +17,7 @@ const parseArguments = (args) => {
 
   if (!rootPath || !cwd) {
     console.error(
-      'Usage: hashUpdater --rootPath="/path/to/scan" --cwd="/location/to/do/the/replacement"',
+      'Usage: npx hasset --rootPath="/path/to/scan" --cwd="/location/to/do/the/replacement"',
     );
     process.exit(1);
   }
