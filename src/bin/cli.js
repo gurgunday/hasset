@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { generateHashes } from "../ghash.js";
+import { generateHashesAndReplace } from "../index.js";
 import process from "node:process";
 
 const parseArguments = (args) => {
@@ -33,7 +33,7 @@ const main = async () => {
     console.log(`Scanning files in: ${rootPath}`);
     console.log(`Updating files in: ${cwd}`);
 
-    await generateHashes({
+    await generateHashesAndReplace({
       rootPaths: rootPath,
       updateCwd: cwd,
     });
