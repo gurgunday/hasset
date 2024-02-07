@@ -3,7 +3,7 @@
   "description": "Add hash postfixes to your assets.",
   "author": "Gürgün Dayıoğlu",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "bin": "./src/bin/cli.js",
   "main": "./src/index.js",
