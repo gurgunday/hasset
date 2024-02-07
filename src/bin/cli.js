@@ -4,38 +4,38 @@ import { generateHashesAndReplace } from "../index.js";
 import process from "node:process";
 
 const parseArguments = (args) => {
-  let rootPath = "";
-  let cwd = "";
+  let root = "";
+  let cwds = null;
 
   for (const arg of args) {
-    if (arg.startsWith("--rootPath=")) {
-      rootPath = arg.split("=", 2)[1];
-    } else if (arg.startsWith("--cwd=")) {
-      cwd = arg.split("=", 2)[1];
+    if (arg.startsWith("--root=")) {
+      root = arg.split("=", 2)[1];
+    } else if (arg.startsWith("--cwds=")) {
+      cwds = arg.split("=", 2)[1].split(",");
     }
   }
 
-  if (!rootPath || !cwd) {
+  if (!root || !cwds) {
     console.error(
-      'Usage: npx hasset --rootPath="/path/to/scan" --cwd="/location/to/do/the/replacement"',
+      'Usage: npx hasset --root="/path/to/scan/" --cwds="/location/to/do/the/replacement1/,/location/to/do/the/replacement2/"',
     );
     process.exit(1);
   }
 
-  return { rootPath, cwd };
+  return { root, cwds };
 };
 
 const main = async () => {
-  const { rootPath, cwd } = parseArguments(process.argv.slice(2));
+  const { root, cwds } = parseArguments(process.argv.slice(2));
 
   try {
     console.log(`Generating hashes and updating file paths...`);
-    console.log(`Scanning files in: ${rootPath}`);
-    console.log(`Updating files in: ${cwd}`);
+    console.log(`Scanning files in: ${root}`);
+    console.log(`Updating files in: ${cwds}`);
 
     await generateHashesAndReplace({
-      rootPaths: rootPath,
-      updateCwd: cwd,
+      roots: root,
+      cwds,
     });
 
     console.log("Hash generation and file updates completed successfully.");

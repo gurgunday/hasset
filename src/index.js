@@ -20,50 +20,53 @@ const generateFileHash = async (filePath) => {
 
 const updateFilePathsWithHashes = async (
   fileHashes,
-  updateCwd,
-  skipPatterns,
+  cwds,
   includeDotFiles,
+  skipPatterns,
 ) => {
-  updateCwd = updateCwd.split(win32.sep).join(posix.sep);
-  if (!updateCwd.endsWith("/")) {
-    updateCwd += "/";
-  }
-
-  const filesIterable = new Glob("**/**", {
-    cwd: updateCwd,
-    absolute: true,
-    follow: true,
-    nodir: true,
-    dot: includeDotFiles,
-    ignore: skipPatterns,
-  });
-
-  for await (const file of filesIterable) {
-    let content = await readFile(file, "utf8");
-    let changed = false;
-
-    for (const [originalPath, hash] of fileHashes) {
-      if (content.includes(originalPath)) {
-        const hashedPath = `${originalPath}?hash=${hash}`;
-        content = content.replaceAll(originalPath, hashedPath);
-        changed = true;
-      }
+  for (let cwd of cwds) {
+    cwd = cwd.split(win32.sep).join(posix.sep);
+    if (!cwd.endsWith("/")) {
+      cwd += "/";
     }
 
-    if (changed) {
-      await writeFile(file, content);
+    const filesIterable = new Glob("**/**", {
+      cwd,
+      absolute: true,
+      follow: true,
+      nodir: true,
+      dot: includeDotFiles,
+      ignore: skipPatterns,
+    });
+
+    for await (const file of filesIterable) {
+      let content = await readFile(file, "utf8");
+      let changed = false;
+
+      for (const [originalPath, hash] of fileHashes) {
+        if (content.includes(originalPath)) {
+          const hashedPath = `${originalPath}?hash=${hash}`;
+          content = content.replaceAll(originalPath, hashedPath);
+          changed = true;
+        }
+      }
+
+      if (changed) {
+        await writeFile(file, content);
+      }
     }
   }
 };
 
 const generateHashesAndReplace = async ({
-  rootPaths,
-  updateCwd,
-  skipPatterns = ["**/node_modules/**"],
+  roots,
+  cwds,
   includeDotFiles = false,
+  skipPatterns = ["**/node_modules/**"],
 }) => {
   const fileHashes = new Map();
-  const roots = Array.isArray(rootPaths) ? rootPaths : [rootPaths];
+  roots = Array.isArray(roots) ? roots : [roots];
+  cwds = Array.isArray(cwds) ? cwds : [cwds];
 
   for (let rootPath of roots) {
     rootPath = rootPath.split(win32.sep).join(posix.sep);
@@ -100,9 +103,9 @@ const generateHashesAndReplace = async ({
 
   await updateFilePathsWithHashes(
     fileHashes,
-    updateCwd,
-    skipPatterns,
+    cwds,
     includeDotFiles,
+    skipPatterns,
   );
 };
 
