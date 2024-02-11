@@ -33,7 +33,7 @@ Add the `hasset` command to the build script:
 
 ```json
 "scripts": {
-  "build": "npx hasset --roots=src/assets/ --cwds=src/views/,src/routes/",
+  "build": "npx hasset --roots=assets/ --cwds=views/,routes/",
 },
 ```
 
