@@ -1,6 +1,6 @@
 {
   "name": "hasset",
-  "description": "Add hash postfixes to your assets.",
+  "description": "Append unique hashes to assets referenced in your views.",
   "author": "Gürgün Dayıoğlu",
   "license": "MIT",
   "version": "0.3.0",

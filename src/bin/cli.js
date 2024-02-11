@@ -17,7 +17,7 @@ const parseArguments = (args) => {
 
   if (!roots || !cwds) {
     console.error(
-      'Usage: npx hasset --roots="/path/to/scan1/,/path/to/scan2" --cwds="/location/to/do/the/replacement1/,/location/to/do/the/replacement2/"',
+      'Usage: npx hasset --roots="path/to/scan/assets1/,path/to/scan/assets2/" --cwds="views/path/to/append/hashes1/,views/path/to/append/hashes2/"',
     );
     process.exit(1);
   }
