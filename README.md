@@ -14,9 +14,22 @@ Run the following command at the root of the project:
 npx hasset --roots="path/to/scan/assets1/,path/to/scan/assets2/" --cwds="views/path/to/append/hashes1/,views/path/to/append/hashes2/"
 ```
 
-## Docker Example
+## Fastify and Docker Example
 
-The following command should be run during the build process:
+Register `@fastify/static`:
+
+```js
+await fastify.register(import("@fastify/static"), {
+  root: new URL("assets/", import.meta.url).pathname,
+  prefix: "/p/assets/",
+  wildcard: false,
+  index: false,
+  immutable: true,
+  maxAge: process.env.NODE_ENV === "production" ? 31536000 * 1000 : 0,
+});
+```
+
+Add the `hasset` command to the build script:
 
 ```json
 "scripts": {
@@ -24,7 +37,7 @@ The following command should be run during the build process:
 },
 ```
 
-Then, in the Dockerfile:
+Make sure to `npm run build` in `Dockerfile`:
 
 ```dockerfile
 FROM node:latest
