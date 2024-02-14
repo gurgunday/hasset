@@ -8,8 +8,6 @@ npm i hasset
 
 ## Usage
 
-Run the following command at the root of the project:
-
 ```bash
 npx hasset --roots="path/to/scan/assets1/,path/to/scan/assets2/" --cwds="views/path/to/append/hashes1/,views/path/to/append/hashes2/"
 ```
