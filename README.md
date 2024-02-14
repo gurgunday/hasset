@@ -8,7 +8,7 @@ npm i hasset
 
 ## Usage
 
-Running the following command will scan asset files found in the `roots` path(s) and replace their references with hashed versions in the `refs` path(s).
+Running the following command will scan asset files found in the `roots` path(s) and replace their references with hashed versions in the `refs` path(s):
 
 ```bash
 npx hasset --roots="path/to/scan/assets1/,path/to/scan/assets2/" --refs="views/path/to/append/hashes1/,views/path/to/append/hashes2/"
