@@ -1,3 +1,5 @@
+/*eslint n/no-missing-import: "off" */
+
 import Fastify from "fastify";
 
 const fastify = Fastify();
