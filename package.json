@@ -15,8 +15,8 @@
     "test": "npm run lint",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write .",
-    "example:build": "node src/bin/cli.js --roots=example/assets --refs=example/routes/",
-    "example": "npm run example:build  && node ./example/fastify-html.js"
+    "example:hasset": "node src/bin/cli.js --roots=example/assets --refs=example/routes/",
+    "example": "npm run example:hasset  && node ./example/fastify-html.js"
   },
   "dependencies": {
     "fastq": "^1.17.1",
