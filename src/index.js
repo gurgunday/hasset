@@ -34,7 +34,7 @@ const updateFilePathsWithHashes = async (
       nodir: true,
       follow: true,
       absolute: true,
-      ref,
+      cwd: ref,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
@@ -82,7 +82,7 @@ const generateHashesAndReplace = async ({
       nodir: true,
       follow: true,
       absolute: true,
-      ref: rootPath,
+      cwd: rootPath,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
