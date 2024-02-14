@@ -19,10 +19,10 @@ export default async (fastify) => {
       </html>`;
   });
 
-  fastify.get("/", (request, reply) => {
-    reply.html(html`
-      <h1>Hello, world!</h1>
+  fastify.get("/", async (request, reply) => {
+    return reply.html`
+      <h1 class="caption">Hello, world!</h1>
       <img width="500" src="/p/assets/cat.jpeg" alt="Picture of a cat" />
-    `);
+    `;
   });
 };
