@@ -56,7 +56,3 @@ RUN npm prune --production
 
 CMD ["npm", "start"]
 ```
-
-## Real Example
-
-Run `npm run example` to see `hasset` in action.
