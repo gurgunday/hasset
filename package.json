@@ -15,7 +15,7 @@
     "test": "npm run lint",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write .",
-    "example:build": "node src/bin/cli.js --roots=example/assets --cwds=example/routes/",
+    "example:build": "node src/bin/cli.js --roots=example/assets --refs=example/routes/",
     "example": "npm run example:build  && node ./example/server.js"
   },
   "dependencies": {

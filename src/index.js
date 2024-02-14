@@ -20,21 +20,21 @@ const generateFileHash = async (filePath) => {
 
 const updateFilePathsWithHashes = async (
   fileHashes,
-  cwds,
+  refs,
   includeDotFiles,
   skipPatterns,
 ) => {
-  for (let cwd of cwds) {
-    cwd = cwd.split(win32.sep).join(posix.sep);
-    if (!cwd.endsWith("/")) {
-      cwd += "/";
+  for (let ref of refs) {
+    ref = ref.split(win32.sep).join(posix.sep);
+    if (!ref.endsWith("/")) {
+      ref += "/";
     }
 
     const filesIterable = new Glob("**/**", {
       nodir: true,
       follow: true,
       absolute: true,
-      cwd,
+      ref,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
@@ -60,13 +60,13 @@ const updateFilePathsWithHashes = async (
 
 const generateHashesAndReplace = async ({
   roots,
-  cwds,
+  refs,
   includeDotFiles = false,
   skipPatterns = ["**/node_modules/**"],
 }) => {
   const fileHashes = new Map();
   roots = Array.isArray(roots) ? roots : [roots];
-  cwds = Array.isArray(cwds) ? cwds : [cwds];
+  refs = Array.isArray(refs) ? refs : [refs];
 
   for (let rootPath of roots) {
     rootPath = rootPath.split(win32.sep).join(posix.sep);
@@ -82,7 +82,7 @@ const generateHashesAndReplace = async ({
       nodir: true,
       follow: true,
       absolute: true,
-      cwd: rootPath,
+      ref: rootPath,
       dot: includeDotFiles,
       ignore: skipPatterns,
     });
@@ -103,7 +103,7 @@ const generateHashesAndReplace = async ({
 
   await updateFilePathsWithHashes(
     fileHashes,
-    cwds,
+    refs,
     includeDotFiles,
     skipPatterns,
   );
