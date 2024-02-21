@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "main": "./server.js",
   "scripts": {
     "start": "node server.js",
     "build": "node ../src/bin/cli.js --roots=assets/ --refs=routes/"

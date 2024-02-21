@@ -64,6 +64,8 @@ A full project that uses `hasset` can be found in the `example` folder:
 ```shell
 cd example
 
+npm i
+
 npm run build
 
 node .
