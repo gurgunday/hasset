@@ -14,7 +14,7 @@ Running the following command will scan asset files found in the `roots` path(s)
 npx hasset --roots="path/to/scan/assets1/,path/to/scan/assets2/" --refs="views/path/to/append/hashes1/,views/path/to/append/hashes2/"
 ```
 
-## Usage Example
+## Example (Fastify)
 
 Register `@fastify/static`:
 
@@ -55,4 +55,16 @@ RUN npm run build
 RUN npm prune --production
 
 CMD ["npm", "start"]
+```
+
+## Demo
+
+A full project that uses `hasset` can be found in the `example` folder:
+
+```shell
+cd example
+
+npm run build
+
+node .
 ```
