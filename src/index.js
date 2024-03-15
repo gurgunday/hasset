@@ -46,7 +46,7 @@ const updateFilePathsWithHashes = async (
 
       for (const [originalPath, hash] of fileHashes) {
         const regex = new RegExp(
-          `(${originalPath.replace(/[$/\-\\^$*+?.()|[\]{}]/gu, "\\$&")})(\\?hash=[a-fA-F0-9]*)?`,
+          `(${originalPath.replace(/[$/\\^$*+?.()|[\]{}]/gu, "\\$&")})(\\?hash=[a-fA-F0-9]*)?`,
           "gu",
         );
 
