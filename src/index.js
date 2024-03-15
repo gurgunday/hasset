@@ -46,7 +46,7 @@ const updateFilePathsWithHashes = async (
 
       for (const [originalPath, hash] of fileHashes) {
         const regex = new RegExp(
-          `(${originalPath.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&")})(\\?hash=[^"]*)?`,
+          `(${originalPath.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&")})(\\?hash=[a-fA-F0-9]*)?`,
           "gu",
         );
 
@@ -92,12 +92,14 @@ const generateHashesAndReplace = async ({
       ignore: skipPatterns,
     });
 
+    // eslint-disable-next-line no-await-in-loop
     for await (let file of filesIterable) {
       file = file.split(win32.sep).join(posix.sep);
       files.push(file);
       queuePromises.push(queue.push(file));
     }
 
+    // eslint-disable-next-line no-await-in-loop
     const hashes = await Promise.all(queuePromises);
 
     for (let i = 0; i < files.length; i++) {
