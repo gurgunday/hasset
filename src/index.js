@@ -42,21 +42,34 @@ const updateFilePathsWithHashes = async (
     // eslint-disable-next-line no-await-in-loop
     for await (const file of filesIterable) {
       let content = await readFile(file, "utf8");
-      let changed = false;
+      let found = false;
 
       for (const [originalPath, hash] of fileHashes) {
+        const escapedPath = originalPath.replace(
+          /[$()*+.?[\\\]^{|}]/gu,
+          "\\$&",
+        );
         const regex = new RegExp(
-          `(${originalPath.replace(/[$()*+.?[\\\]^{|}]/gu, "\\$&")})(\\?hash=[a-fA-F0-9]*)?`,
+          `(?<path>${escapedPath})(\\?(?<queryString>[^#"']*))?`,
           "gu",
         );
 
-        content = content.replace(regex, (match, p1) => {
-          changed = true;
-          return `${p1}?hash=${hash}`;
-        });
+        content = content.replace(
+          regex,
+          (match, p1, p2, p3, offset, string, groups) => {
+            found = true;
+            const { path, queryString } = groups;
+
+            return !queryString
+              ? `${path}?hash=${hash}`
+              : queryString.includes("hash=")
+                ? `${path}?${queryString.replace(/(?<hash>hash=)[\dA-Fa-f]*/u, `$1${hash}`)}`
+                : `${path}?hash=${hash}&${queryString}`;
+          },
+        );
       }
 
-      if (changed) {
+      if (found) {
         await writeFile(file, content);
       }
     }

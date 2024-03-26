@@ -29,16 +29,16 @@ const main = async () => {
   const { roots, refs } = parseArguments(process.argv.slice(2));
 
   try {
-    console.log(`Generating hashes and updating file paths...`);
-    console.log(`Scanning files in: ${roots}`);
-    console.log(`Updating files in: ${refs}`);
+    console.warn(`Generating hashes and updating file paths...`);
+    console.warn(`Scanning files in: ${roots}`);
+    console.warn(`Updating files in: ${refs}`);
 
     await generateHashesAndReplace({
       roots,
       refs,
     });
 
-    console.log("Hash generation and file updates completed successfully.");
+    console.warn("Hash generation and file updates completed successfully.");
   } catch (error) {
     console.error(`Error occurred: ${error.message}`);
     process.exit(1);

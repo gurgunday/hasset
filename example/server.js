@@ -19,4 +19,4 @@ await fastify.register(import("fastify-html"));
 fastify.register(import("./routes/index.js"));
 
 await fastify.listen({ port: 5050 });
-console.log("Server listening at http://localhost:5050");
+console.warn("Server listening at http://localhost:5050");
