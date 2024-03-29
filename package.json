@@ -3,7 +3,7 @@
   "description": "Append unique hashes to assets referenced in your views to aggressively cache them while guaranteeing that clients receive the most recent versions.",
   "author": "Gürgün Dayıoğlu",
   "license": "MIT",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "type": "module",
   "bin": "./src/bin/cli.js",
   "main": "./src/index.js",
