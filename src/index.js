@@ -50,7 +50,7 @@ const updateFilePathsWithHashes = async (
           "\\$&",
         );
         const regex = new RegExp(
-          `(?<path>${escapedPath})(\\?(?<queryString>[^#"']*))?`,
+          `(?<path>${escapedPath})(\\?(?<queryString>[^#"'\`]*))?`,
           "gu",
         );
 
